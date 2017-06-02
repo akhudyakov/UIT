@@ -1,6 +1,6 @@
 package Tests;
 
-import Factory.MyDriverFactory;
+import Driver.MyDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;

@@ -13,7 +13,7 @@ public class EmailFactory {
       user = ResourceBundle.getBundle("User");
     }*/
 
-    public Email getEmail() {
+    public static Email getEmail() {
         return new Email(email.getString("receiverEmail"),email.getString("receiverName"),email.getString("subject"));
     }
 }

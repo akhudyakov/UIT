@@ -12,8 +12,18 @@ public class UserFactory {
       user = ResourceBundle.getBundle("User");
     }*/
 
-    public User getValidUser() {
+    public static User getValidUser() {
         return new User(user.getString("valid.username"),user.getString("valid.password"),
+                user.getString("valid.email"));
+    }
+
+    public static User getNonExistingUser() {
+        return new User(user.getString("nonexistent.username"),user.getString("valid.password"),
+                user.getString("invalid.email"));
+    }
+
+    public static User getInvalidPasswordUser() {
+        return new User(user.getString("valid.username"),user.getString("invalid.password"),
                 user.getString("valid.email"));
     }
 }

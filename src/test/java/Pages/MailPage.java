@@ -1,7 +1,6 @@
 package Pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
@@ -11,7 +10,7 @@ import java.util.List;
 /**
  * Created by adminnt on 29.04.17.
  */
-public class AfterLoginPage extends BasePage {
+public class MailPage extends BasePage {
 
     @FindBy(id = "PH_user-email")
     private WebElement userLoginEmail;
@@ -32,20 +31,16 @@ public class AfterLoginPage extends BasePage {
     @FindBy(xpath = "//i[@class='ico ico_folder ico ico_folder_inbox']")
     private WebElement linkInbox;
 
-    public AfterLoginPage(WebDriver driver) {
-        super(driver);
-    }
-
     public void goToInbox() {
         linkInbox.click();
     }
 
     public SendEmailPage clickToStartWriteEmail() {
         writeMailButton.click();
-        return new SendEmailPage(driver);
+        return new SendEmailPage();
     }
 
-    public void deleteRemainedTestEmailsWithSubject(String subject) {
+    protected void deleteRemainedTestEmailsWithSubject(String subject) {
         int countTotalEmails = 0;
         List<WebElement> emailSubjects = getEmailSubjects();
         for (WebElement element : emailSubjects) {
@@ -60,7 +55,7 @@ public class AfterLoginPage extends BasePage {
         buttonDeleteEmail.click();
     }
 
-    public int countEmailWithSubject(String subject) {
+    protected int countEmailsWithSubject(String subject) {
         int countEmailsWithsubject = 0;
         List<WebElement> emailSubjects = getEmailSubjects();
         for (WebElement element : emailSubjects) {
@@ -71,12 +66,8 @@ public class AfterLoginPage extends BasePage {
         return countEmailsWithsubject;
     }
 
-    public String getMailUser() {
-        return userLoginEmail.getText();
-    }
-
     public WebElement getUserLoginEmail() {
-        return userLoginEmail;
+        return driver.getWebElementWithVisibilityOfWait(userLoginEmail, 5);
     }
 
     public WebElement getEmailSubject() {
@@ -86,4 +77,10 @@ public class AfterLoginPage extends BasePage {
     public List<WebElement> getEmailSubjects() {
         return listEmailsubjects;
     }
+
+    public void refresh() {
+        driver.navigate().refresh();
+    }
+
+
 }

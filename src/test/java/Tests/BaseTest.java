@@ -1,7 +1,8 @@
 package Tests;
 
-import Factory.MyDriverFactory;
-import org.openqa.selenium.WebDriver;
+import Utils.EmailFactory;
+import Utils.User;
+import Utils.UserFactory;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
@@ -10,19 +11,27 @@ import org.testng.annotations.BeforeSuite;
  */
 public class BaseTest {
 
-    protected WebDriver driver;
-    final String BASE_URL = "https://mail.ru/";
+    MyApplication app = new MyApplication();
+    User validUser;
+    User nonExistingdUser;
+    User invalidPasswordUser;
+    String emailSubject;
+    String emailReceiver;
 
     @BeforeSuite
     public void beforeSuit() {
-        driver = MyDriverFactory.getDriver();
-        driver.get(BASE_URL);
+        System.out.println("Before Suit");
+        validUser = UserFactory.getValidUser();
+        nonExistingdUser = UserFactory.getNonExistingUser();
+        invalidPasswordUser = UserFactory.getInvalidPasswordUser();
+        emailSubject = EmailFactory.getEmail().subject;
+        emailReceiver = EmailFactory.getEmail().receiverName;
+        app.common.appStart();
     }
 
     @AfterSuite
     public void afterSuite() {
-        System.out.println("Aftersuite");
-        driver.quit();
+        app.common.appStop();
     }
 
 }

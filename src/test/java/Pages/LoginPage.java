@@ -1,7 +1,6 @@
 package Pages;
 
 import Utils.User;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,22 +18,10 @@ public class LoginPage extends BasePage {
     @FindBy(id = "mailbox__auth__button")
     private WebElement authButton_;
 
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
-    /*public AfterLoginPage login(String name, String password) {
-        name_.sendKeys(name);
-        password_.sendKeys(password);
-        authButton_.submit();
-        return new AfterLoginPage(driver);
-    }*/
-
-    public AfterLoginPage login(User user) {
+    protected MailPage login(User user) {
         name_.sendKeys(user.username);
         password_.sendKeys(user.password);
         authButton_.submit();
-        return new AfterLoginPage(driver);
+        return new MailPage();
     }
 }

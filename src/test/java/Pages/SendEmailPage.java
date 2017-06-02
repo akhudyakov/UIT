@@ -1,13 +1,12 @@
 package Pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Andrey on 11.05.2017.
  */
-public class SendEmailPage extends AfterLoginPage {
+public class SendEmailPage extends MailPage {
 
     @FindBy(xpath = "//div[@class='compose-head__row-wrapper compose-head__row-wrapper_to js-row']//label [@class='compose-label js-addressbook-link']/span [@class='compose-label__text']")
     private WebElement labelWhomEmail;
@@ -30,30 +29,20 @@ public class SendEmailPage extends AfterLoginPage {
     @FindBy(xpath = "//div[@class='b-toolbar__btn b-toolbar__btn_ b-toolbar__btn_false js-shortcut']/span[@class='b-toolbar__btn__text']")
     private WebElement buttonSendEmail;
 
-    public SendEmailPage(WebDriver driver) {
-        super(driver);
-    }
-
     public ContactPage getFormEmailContact() {
         linkWhomEmail.click();
-        return new ContactPage(driver);
+        return new ContactPage();
     }
 
-    public ConfirmSendEmptyEmailContentPage SendEmptyBodyEmail() {
-        textSubjectField.sendKeys("AKhudyakov's test email");
+    public ConfirmSendEmptyEmailContentPage sendEmptyBodyEmail(String subject) {
+        textSubjectField.sendKeys(subject);
         buttonSendEmail.click();
-        return new ConfirmSendEmptyEmailContentPage(driver);
+        return new ConfirmSendEmptyEmailContentPage();
     }
 
     public WebElement getLabelWhomEmail() {return labelWhomEmail; }
 
-    public WebElement getTextSubjectField() {
-        return textSubjectField;
-    }
-
     public WebElement getLabelAlreadyAddedReceiverInWhom() {
         return labelAlreadyAddedReceiverInWhom;
     }
-
-    public WebElement getButtonSendEmail() {   return buttonSendEmail; }
 }

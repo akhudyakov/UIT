@@ -1,13 +1,12 @@
 package Pages;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Andrey on 11.05.2017.
  */
-public class ContactPage extends AfterLoginPage {
+public class ContactPage extends MailPage {
 
     @FindBy(xpath = "//div[@class='js-checkbox b-checkbox b-checkbox_transparent b-checkbox_false js-shortcut']/div[@class='b-checkbox__box']")
     private WebElement checkboxReceiverInAddressBook;
@@ -18,7 +17,6 @@ public class ContactPage extends AfterLoginPage {
     @FindBy(xpath = "//button[@data-id='popup_ok']")
     private WebElement buttonAddReceiver;
 
-    public ContactPage(WebDriver driver) {  super(driver); }
 
     public void selectAccountReceiverInReceiverForm() {
         textAccountReceiver.click();
@@ -26,7 +24,7 @@ public class ContactPage extends AfterLoginPage {
 
     public SendEmailPage addSelectedReceiverToEmail() {
         buttonAddReceiver.click();
-        return new SendEmailPage(driver);
+        return new SendEmailPage();
     }
 
     public WebElement getTextAccountReceiver() {
